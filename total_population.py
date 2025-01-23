@@ -1,7 +1,8 @@
+import logging
 from collections import defaultdict
 
 from constants import DATA_PATH
-from utils import read_data
+from utils import configure_logging, read_data
 
 
 EXPECTED_RESULT = {
@@ -26,9 +27,10 @@ def population_by_continent(data):
 
 
 if __name__ == '__main__':
+    configure_logging()
     data = read_data(DATA_PATH)
     result = population_by_continent(data)
     assert result == EXPECTED_RESULT, (
         f'Ожидаемые данные: {EXPECTED_RESULT} Вывод: {result}'
     )
-    print(result)
+    logging.info(f'Вывод: {result}')

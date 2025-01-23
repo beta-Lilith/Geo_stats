@@ -1,5 +1,7 @@
-from utils import read_data, write_data
-from constants import DATA_PATH
+import logging
+
+from utils import configure_logging, read_data, write_data
+from constants import DATA_PATH, DOWNLOAD_DIR
 
 
 def calculate_population_stats(data):
@@ -27,6 +29,9 @@ def calculate_population_stats(data):
 
 
 if __name__ == '__main__':
+    configure_logging()
+    file_name = 'stats.json'
     write_data(
         calculate_population_stats(read_data(DATA_PATH)),
-        'stats.json')
+        file_name)
+    logging.info(f'Данные записаны в файле {DOWNLOAD_DIR/file_name}')

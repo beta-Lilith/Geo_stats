@@ -1,4 +1,7 @@
+import logging
 import os
+
+from utils import configure_logging
 
 
 def find_files_with_extension(directory, extension):
@@ -13,17 +16,16 @@ def find_files_with_extension(directory, extension):
 
 
 if __name__ == '__main__':
+    configure_logging()
     directory = input('Введите путь к директории: ')
     extension = input('Введите расширение файлов: ')
     file_paths = find_files_with_extension(directory, extension)
     if file_paths:
-        print(
-            'Найденные файлы:',
-            *file_paths,
-            sep='\n'
-        )
+        logging.info('Найденные файлы:')
+        for path in file_paths:
+            logging.info(path)
     else:
-        print(
+        logging.warning(
             f'Не найдено ни одного файла с расширением {extension} '
             f'в дирректории {directory} и ее поддиректориях.'
         )
